@@ -246,14 +246,14 @@
       <div class="scard bad">
         <div class="tag">Monolith · Option A</div>
         <div class="head">Leaf-local on the compute fabric</div>
-        <p>CNodes hang off compute leaves. Synchronous, bursty checkpoint and dataset-staging I/O then crosses the same super-spine core that carries all-reduce east-west collectives. In a non-blocking 3 level fat tree with 72 GPUs per rack and Q3400-RA switch this really isn't possible.</p>
+        <p>CNodes hang off compute leaves. Synchronous, bursty checkpoint and dataset-staging I/O then crosses the same super-spine core that carries all-reduce east-west collectives. In a non-blocking 3 level fat tree with 72 GPUs per rack and Q3400-RA switch this really isn't possible as all leaf local ports are full.</p>
         <span class="pen">→ tail-latency spikes, depressed MFU, idle GPU-hours</span>
       </div>
       <div class="scard bad">
         <div class="tag">Monolith · Option B</div>
         <div class="head">Separate Ethernet storage fabric</div>
         <p>Stand up an entirely parallel network: its own VXLAN overlay, routing convention, and lossless PFC/ECN tuning, plus a second control plane that Slurm and Kubernetes must reconcile against the compute fabric.</p>
-        <span class="pen">→ two fabrics, two failure models, permanent ops tax</span>
+        <span class="pen">→ another fabric, another failure domain, huge capex, permanent opex tax</span>
       </div>
       <div class="scard good">
         <div class="tag">Dragonfly+ · Resolved</div>
