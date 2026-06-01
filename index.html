@@ -133,7 +133,7 @@
     <p class="sub">A monolithic 3-tier fat tree buys the cheapest switch count at every scale as folded-Clos is mathematically minimal. It then pays that saving back many times over in super-spine transceivers. The Fordist model replicates self-contained Dragonfly+ pods linked by passive co-located DAC: more switches yet far fewer optics, zero east-west storage contention and lower latency.</p>
     <div class="meta">
       <span>SWITCH · <b>NVIDIA Q3400-RA</b> (72×1.6T OSFP)</span>
-      <span>GPU · <b>NVIDIA B200</b></span>
+      <span>GPU · <b>NVIDIA B200|GB200|GB300|VR200 (72GPU/RACK)</b></span>
       <span>PRICING · FS / NADDOD / FiberMall, May 2026</span>
     </div>
   </header>
@@ -241,24 +241,24 @@
   <div class="storage">
     <h2>The Cost the Switch Count Hides</h2>
     <div class="stitle">A monolithic fabric has no good place to put storage.</div>
-    <p class="intro">VAST CNodes must terminate somewhere, and the comparison above already equalizes the storage optics on both sides. But <em>where</em> the monolith lands that storage is a forced choice between two penalties — neither of which the Fordist design pays.</p>
+    <p class="intro">VAST CNodes must terminate somewhere, and the comparison above already equalizes the storage optics on both sides. But <em>where</em> the monolith lands that storage is a forced choice between two penalties yet neither of which the Fordist design pays.</p>
     <div class="cols">
       <div class="scard bad">
         <div class="tag">Monolith · Option A</div>
         <div class="head">Leaf-local on the compute fabric</div>
-        <p>CNodes hang off compute leaves. Synchronous, bursty checkpoint and dataset-staging I/O then crosses the same super-spine core that carries all-reduce — an east-west traffic storm during the exact collectives it contends with.</p>
+        <p>CNodes hang off compute leaves. Synchronous, bursty checkpoint and dataset-staging I/O then crosses the same super-spine core that carries all-reduce east-west collectives. In a non-blocking 3 level fat tree with 72 GPUs per rack and Q3400-RA switch this really isn't possible.</p>
         <span class="pen">→ tail-latency spikes, depressed MFU, idle GPU-hours</span>
       </div>
       <div class="scard bad">
         <div class="tag">Monolith · Option B</div>
         <div class="head">Separate Ethernet storage fabric</div>
-        <p>Stand up an entirely parallel network: its own VXLAN/EVPN overlay, routing convention, and lossless PFC/ECN tuning, plus a second control plane that Slurm and Kubernetes must reconcile against the compute fabric.</p>
+        <p>Stand up an entirely parallel network: its own VXLAN overlay, routing convention, and lossless PFC/ECN tuning, plus a second control plane that Slurm and Kubernetes must reconcile against the compute fabric.</p>
         <span class="pen">→ two fabrics, two failure models, permanent ops tax</span>
       </div>
       <div class="scard good">
         <div class="tag">Dragonfly+ · Resolved</div>
         <div class="head">DF3 leafless storage group</div>
-        <p>Storage terminates inside the same InfiniBand fabric, on the spare capacity of the very spines that already serve as the UGAL pressure-relief path. It rides idle bandwidth, not contended bandwidth.</p>
+        <p>Storage terminates inside the same InfiniBand fabric, on seperate DF+ group that serves as the UGAL pressure-relief path. It uses idle bandwidth without contention with east-west training collectives.</p>
         <span class="pen">→ one fabric, one convention, no east-west storm</span>
       </div>
     </div>
