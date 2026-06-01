@@ -130,7 +130,7 @@
   <header>
     <div class="kicker">Quackmaster Industries LLC · quackmaster.io · Reference Architecture · Network TCO</div>
     <h1><span>The Switch Tax Is Paid In Optics</span></h1>
-    <p class="sub">A monolithic 3-tier fat tree buys the cheapest switch count at every scale — folded-Clos is mathematically minimal. It then pays that saving back many times over in super-spine transceivers. The Fordist model replicates self-contained Dragonfly+ pods linked by passive co-located DAC: more switches, far fewer optics.</p>
+    <p class="sub">A monolithic 3-tier fat tree buys the cheapest switch count at every scale as folded-Clos is mathematically minimal. It then pays that saving back many times over in super-spine transceivers. The Fordist model replicates self-contained Dragonfly+ pods linked by passive co-located DAC: more switches yet far fewer optics, zero east-west storage contention and lower latency.</p>
     <div class="meta">
       <span>SWITCH · <b>NVIDIA Q3400-RA</b> (72×1.6T OSFP)</span>
       <span>GPU · <b>NVIDIA B200</b></span>
@@ -267,7 +267,7 @@
   <footer>
     <b>Model basis (per-pod BOM × pods):</b> Each DF+ pod = 164 switches (56 leaf + 108 spine), 4,032 leaf↔spine fiber transceivers, 2,376 co-located global passive DAC (zero optics for DF+ global links), 288× 800G long-haul VAST optics. Intra-rack leaf→GPU breakout is a mix of passive DAC (near nodes) and active ACC copper with retimers (mid-rack leaf to top/bottom nodes); the active share is adjustable and applies identically to both topologies, so it nets to zero in the comparison.
     Monolithic fat tree sized as radix-72 folded-Clos: leaf 36-down(breakout)/36-up, spine + super-spine core tier, every spine↔core link a fiber pair requiring two 1.6T optics plus an MPO patch cord.<br>
-    <b>What this chart does not price:</b> GPUs, servers, power, cooling, structured-cabling labor, and optical power/cooling overhead (1.6T optics ≈15–18W each — a second-order operating cost that further favors the DAC-heavy Fordist design). Switch list price for Q3400-RA is not publicly published; $120K is a defensible street estimate and is the most adjustable input. Fiber patch ($120 MPO-12 APC SM), 1.6T optic ($3,600), passive DAC ($400), ACC active copper ($1,100), 800G long-haul optic ($2,000) per FS / NADDOD / FiberMall, May 2026.<br>
+    <b>What this chart does not price:</b> GPUs, servers, power, cooling, structured-cabling labor, and optical power/cooling overhead (1.6T optics ≈15–18W each — a second-order operating cost that further favors the DAC-heavy Fordist design). Switch list price for Q3400-RA is not publicly published; $120-150K is a defensible street estimate and is the most adjustable input. Fiber patch ($120 MPO-12 APC SM), 1.6T optic ($3,600), passive DAC ($400), ACC active copper ($1,100), 800G long-haul optic ($2,000) per FS / NADDOD / FiberMall, May 2026.<br>
     <span class="logo">▲▽▲ QUACKMASTER INDUSTRIES</span> &nbsp;·&nbsp; Shared Nothing Compute, Shared Everything Storage &nbsp;·&nbsp; quackmaster.io
   </footer>
 </div>
